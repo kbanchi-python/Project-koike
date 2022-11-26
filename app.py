@@ -28,7 +28,7 @@ def index2():
     p = request.form["test"]
     if p == "姫待不動尊":
         print(p)
-        return render_template("index3.html")
+        return render_template("index2.html")
     else:
         flash("正解を入れてください")
         return redirect("/")
@@ -43,13 +43,15 @@ def index2():
 #          if a = "姫待不動尊"
 #             return redirect("index2.html")
 
-@app.route("/index3")
+@app.route("/index3",methods=["POST"])
 def index3():
-    p = request.form.get("test")
+    p = request.form["test"]
     if p == "神拝詞":
-        return redirect("index3.html")
-
-    return render_template("index3.html")
+        print(p)
+        return render_template("index3.html")
+    else:
+        flash("正解を入れてください")
+        return render_template("/index2.html")
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8000, debug=True)
