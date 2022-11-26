@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -54,4 +56,5 @@ def index3():
         return render_template("/index2.html")
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=8000, debug=True)
+    port = int(os.getenv("PORT", 5001))
+    app.run(host="0.0.0.0", port=port)
