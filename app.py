@@ -4,6 +4,7 @@ from flask import request
 import json
 import requests
 import secrets
+from flask import redirect, flash
 
 app = Flask(__name__)
 
@@ -13,13 +14,24 @@ app.secret_key = secrets.token_urlsafe(32)
 
 @app.route("/")
 def hello():
+
+    
+    # if 
+    # flash("正解を入力してください")
+    # return redirect(request.url)
+
     return render_template("index1.html")
 
 
-@app.route("/index2")
+@app.route("/index2", methods=["POST"])
 def index2():
-
-    return render_template("index2.html")
+    p = request.form["test"]
+    if p == "姫待不動尊":
+        print(p)
+        return render_template("index3.html")
+    else:
+        flash("正解を入れてください")
+        return redirect("/")
 
 
 # @app.route("/", methods=["GET", "POST"])
@@ -33,7 +45,10 @@ def index2():
 
 @app.route("/index3")
 def index3():
-    
+    p = request.form.get("test")
+    if p == "神拝詞":
+        return redirect("index3.html")
+
     return render_template("index3.html")
 
 if __name__ == "__main__":
